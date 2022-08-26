@@ -1,17 +1,24 @@
 package com.example.demo.models;
 
 import com.sun.istack.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
+@Table(name = "Planet")
 public class Planet {
     //At det er id altså primary type
     @Id
     //at id bliver autoincromented tror jeg
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //behøves ikke men bruges til at give et navn (tror jeg)
     @Column(name = "planet_id")
     private int id;
@@ -25,8 +32,11 @@ public class Planet {
     @Column(name = "planet_diameter")
     private double diameter;
 
-    @ManyToMany(mappedBy = "planets")
-    private Set<PlanetType> planetTypeSet = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "planet_type_planet",
+            joinColumns = @JoinColumn(name = "planet_id"),
+            inverseJoinColumns = @JoinColumn(name = "planet_type_id"))
+    private List<PlanetType> planets;
 
     public Planet(int id, String name, double mass, double diameter) {
         this.id = id;
@@ -34,10 +44,17 @@ public class Planet {
         this.mass = mass;
         this.diameter = diameter;
     }
+
     public Planet(String name, double mass, double diameter) {
         this.name = name;
         this.mass = mass;
         this.diameter = diameter;
+    }
+    public Planet(String name, double mass, double diameter, List<PlanetType> planets) {
+        this.name = name;
+        this.mass = mass;
+        this.diameter = diameter;
+        this.planets = planets;
     }
 
     public Planet() {
