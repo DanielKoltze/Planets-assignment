@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,8 +25,8 @@ public class PlanetType {
     @NotNull
     @Column(name = "planet_type_type")
     private String planetType;
-
-
+    //jsonBackReference er dne der ikke er main
+    @JsonBackReference
     @ManyToMany(mappedBy = "planets")
     private List<Planet> planets;
 

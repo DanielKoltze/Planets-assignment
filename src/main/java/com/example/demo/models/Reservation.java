@@ -26,7 +26,16 @@ public class Reservation {
     @NotNull
     @Column(name = "reservation_time_frame")
     private int timeFrame;
-    /*@NotNull
+
+    public Reservation(int timeFrame, Spaceship spaceship) {
+        this.timeFrame = timeFrame;
+        this.spaceship = spaceship;
+    }
+
     @ManyToOne
-    private Spaceship spaceship;*/
+    private Spaceship spaceship;
+
+    public Reservation() {
+
+    }
 }

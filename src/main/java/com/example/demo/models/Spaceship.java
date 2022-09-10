@@ -28,8 +28,18 @@ public class Spaceship {
     @Column(name = "number_of_seats")
     private int numberOfSeats;
 
-    /*@OneToMany(mappedBy = "spaceship", cascade = CascadeType.ALL)
-    private List<Reservation> reservations;*/
+    @OneToMany(mappedBy = "spaceship")
+    private List<Reservation> reservations;
 
+    public Spaceship(String name, double speed, int numberOfSeats, List<Reservation> reservations) {
+        this.name = name;
+        this.speed = speed;
+        this.numberOfSeats = numberOfSeats;
+        this.reservations = reservations;
 
+    }
+
+    public Spaceship() {
+
+    }
 }

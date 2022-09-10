@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +33,8 @@ public class Planet {
     @NotNull
     @Column(name = "planet_diameter")
     private double diameter;
-
+    //json managed refernece er den der er main
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "planet_type_planet",
             joinColumns = @JoinColumn(name = "planet_id"),
