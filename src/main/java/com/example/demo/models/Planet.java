@@ -40,6 +40,9 @@ public class Planet {
             joinColumns = @JoinColumn(name = "planet_id"),
             inverseJoinColumns = @JoinColumn(name = "planet_type_id"))
     private List<PlanetType> planets;
+    @NotNull
+    @Column(name = "planet_img")
+    private String img;
 
     public Planet(int id, String name, double mass, double diameter) {
         this.id = id;
@@ -47,17 +50,26 @@ public class Planet {
         this.mass = mass;
         this.diameter = diameter;
     }
+    public Planet(int id, String name, double mass, double diameter,String img,List<PlanetType> planets) {
+        this.id = id;
+        this.name = name;
+        this.mass = mass;
+        this.diameter = diameter;
+        this.img = img;
+        this.planets = planets;
+    }
 
     public Planet(String name, double mass, double diameter) {
         this.name = name;
         this.mass = mass;
         this.diameter = diameter;
     }
-    public Planet(String name, double mass, double diameter, List<PlanetType> planets) {
+    public Planet(String name, double mass, double diameter, List<PlanetType> planets, String img) {
         this.name = name;
         this.mass = mass;
         this.diameter = diameter;
         this.planets = planets;
+        this.img = img;
     }
 
     public Planet() {
